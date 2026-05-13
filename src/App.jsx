@@ -109,9 +109,7 @@ export default function App() {
                 const res = await fetch(`${BACKEND_URL}/sguess/daily`);
                 if (!res.ok) throw new Error(`Server returned ${res.status}`);
                 const data = await res.json();
-                const dailyUrl = data.url;
-                console.log(data)
-                console.log(dailyUrl)
+                const dailyUrl = data.url.url;
                 if (!dailyUrl) throw new Error("No url in response");
 
                 const saved = getCookie(COOKIE_KEY);
