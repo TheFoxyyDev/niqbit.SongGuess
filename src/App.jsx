@@ -110,6 +110,8 @@ export default function App() {
                 if (!res.ok) throw new Error(`Server returned ${res.status}`);
                 const data = await res.json();
                 const dailyUrl = data.url;
+                console.log(data)
+                console.log(dailyUrl)
                 if (!dailyUrl) throw new Error("No url in response");
 
                 const saved = getCookie(COOKIE_KEY);
