@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState, useCallback } from "react";
+import LogInButton from "./LogInButton.jsx";
 
 // ===== Cookie helpers =====
 const COOKIE_KEY = "sguess_state";
@@ -338,6 +339,10 @@ export default function App() {
     // ===== Render =====
     return (
         <div className="fixed h-full w-full bg-background flex justify-center items-center">
+
+            {/* Log in button */}
+            <LogInButton />
+
             {/* SoundCloud iframe */}
             {songUrl && (
                 <iframe
@@ -350,7 +355,8 @@ export default function App() {
                 />
             )}
 
-            <div className="relative h-4/5 w-2/5 bg-highlight border-border border-[0.5px] rounded-2xl flex justify-end items-center gap-5 flex-col p-10">
+            {/* Main Playframe */}
+            <div className="relative h-4/5 lg:w-2/5 w-4/5 bg-highlight border-border border-[0.5px] rounded-2xl flex justify-end items-center gap-5 flex-col p-10">
 
                 {/* Loading / error state */}
                 {!songUrl && !loadError && (
@@ -377,7 +383,7 @@ export default function App() {
                         {/* Game over banner */}
                         {gameOver && (
                             <div className={`w-5/6 rounded-lg border-border border-[0.5px] py-3 px-4 text-center font-mono text-lg ${won ? "bg-defgreen text-black" : "bg-defred text-black"}`}>
-                                {won ? "🎉 Correct!" : `The song was: ${correctArtist} - ${correctTitle}`}
+                                {won ? "Correct!" : `The song was: ${correctArtist} - ${correctTitle}`}
                             </div>
                         )}
 
@@ -459,6 +465,19 @@ export default function App() {
                         </div>
                     </>
                 )}
+            </div>
+
+            {/* powered by text */}
+            <div className="fixed w-auto h-10 bottom-5 right-5 text-white font-mono flex justify-center items-center gap-3">
+                powered by
+                    <motion.a
+                        className="relative h-full" href="https://soundcloud.com"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 30}}
+                    >
+                        <img className="h-full relative" src="/soundcloud.png" alt="soundcloud" />
+                    </motion.a>
             </div>
         </div>
     );
